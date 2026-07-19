@@ -6,13 +6,17 @@ drive a virtual clock; timers and (later) net/uring fire only when that clock
 advances.
 
 **Program track**: Track 0 (`edge-platform-program-design.md`).  
-**Current milestone**: **P0.3** — `sim_uring` (class A SQ/CQ).
+**Current milestone**: **P0.4** — fuzz helpers + policy (Track 0 complete).
 
 ## Key commands
 
 ```bash
 cmake -B build -S . && cmake --build build
 ctest --test-dir build --output-on-failure
+
+# Optional libFuzzer (clang):
+cmake -B build-fuzz -S . -DBUILD_FUZZ=ON -DCMAKE_C_COMPILER=clang
+cmake --build build-fuzz --target fuzz_sim_bc fuzz_sim_a
 ```
 
 ## Documentation map
@@ -41,8 +45,7 @@ ctest --test-dir build --output-on-failure
 
 ## Current status
 
-**P0.1–P0.3**: clock, timer, net, uring sim + smoke tests.  
-**Next**: **P0.4** fuzz helpers + policy docs.
+**P0.1–P0.4 complete**: clock, timer, net, uring, `sim_fuzz` drivers, fuzz policy.
 
 ## Host classes
 

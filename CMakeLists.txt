@@ -10,11 +10,13 @@ if(NOT MSVC)
 endif()
 
 option(LIBSIM_NO_URING "Exclude sim_uring (class B/C builds)" OFF)
+option(BUILD_FUZZ "Build libFuzzer harnesses (clang)" OFF)
 
 set(SIM_SOURCES
   src/sim_clock.c
   src/sim_timer.c
   src/sim_net.c
+  src/sim_fuzz.c
 )
 if(NOT LIBSIM_NO_URING)
   list(APPEND SIM_SOURCES src/sim_uring.c)
@@ -38,10 +40,29 @@ add_executable(sim_net_test tests/test_sim_net.c)
 target_link_libraries(sim_net_test PRIVATE sim)
 add_test(NAME sim_net COMMAND sim_net_test)
 
+add_executable(sim_fuzz_test tests/test_sim_fuzz.c)
+target_link_libraries(sim_fuzz_test PRIVATE sim)
+add_test(NAME sim_fuzz COMMAND sim_fuzz_test)
+
 if(NOT LIBSIM_NO_URING)
   add_executable(sim_uring_test tests/test_sim_uring.c)
   target_link_libraries(sim_uring_test PRIVATE sim)
   add_test(NAME sim_uring COMMAND sim_uring_test)
+endif()
+
+if(BUILD_FUZZ)
+  if(NOT CMAKE_C_COMPILER_ID MATCHES "Clang")
+    message(WARNING "BUILD_FUZZ is intended for Clang libFuzzer")
+  endif()
+  add_executable(fuzz_sim_bc fuzz/fuzz_sim_bc.c)
+  target_link_libraries(fuzz_sim_bc PRIVATE sim)
+  target_compile_options(fuzz_sim_bc PRIVATE -fsanitize=fuzzer,address)
+  target_link_options(fuzz_sim_bc PRIVATE -fsanitize=fuzzer,address)
+
+  add_executable(fuzz_sim_a fuzz/fuzz_sim_a.c)
+  target_link_libraries(fuzz_sim_a PRIVATE sim)
+  target_compile_options(fuzz_sim_a PRIVATE -fsanitize=fuzzer,address)
+  target_link_options(fuzz_sim_a PRIVATE -fsanitize=fuzzer,address)
 endif()
 
 include(GNUInstallDirs)

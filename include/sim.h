@@ -8,6 +8,7 @@
 #include "sim_clock.h"
 #include "sim_timer.h"
 #include "sim_net.h"
+#include "sim_fuzz.h"
 #if !defined(LIBSIM_NO_URING)
 #include "sim_uring.h"
 #endif
