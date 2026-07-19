@@ -6,7 +6,7 @@ drive a virtual clock; timers and (later) net/uring fire only when that clock
 advances.
 
 **Program track**: Track 0 (`edge-platform-program-design.md`).  
-**Current milestone**: **P0.2** — `sim_net` (pipes + listen/accept).
+**Current milestone**: **P0.3** — `sim_uring` (class A SQ/CQ).
 
 ## Key commands
 
@@ -41,12 +41,12 @@ ctest --test-dir build --output-on-failure
 
 ## Current status
 
-**P0.1–P0.2**: `sim_clock` + `sim_timer` + `sim_net` + smoke tests.  
-**Next**: **P0.3** `sim_uring` (class A / edgehost fuzz).
+**P0.1–P0.3**: clock, timer, net, uring sim + smoke tests.  
+**Next**: **P0.4** fuzz helpers + policy docs.
 
-## Host classes (preview)
+## Host classes
 
 | Class | Uses |
 |-------|------|
-| **A** (edgehost) | clock + timer + net + sim_uring (P0.3) |
-| **B/C** (CPE agent, mobile) | clock + timer + net only |
+| **A** (edgehost) | clock + timer + net + `sim_uring` |
+| **B/C** (CPE agent, mobile) | clock + timer + net; build with `-DLIBSIM_NO_URING=ON` if desired |

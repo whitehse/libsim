@@ -10,3 +10,5 @@
 | **Class B/C host** | Needs clock/timer/net only |
 | **sim_net pipe** | Two connected stream endpoints; send on A → recv on B |
 | **EAGAIN** | Ring full (send) or empty (recv); non-blocking shape |
+| **SQE / CQE** | Submission / completion queue entries (`sim_uring`) |
+| **progress** | Retry deferred uring ops after net or clock changes |
