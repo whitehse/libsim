@@ -1,7 +1,8 @@
 # libsim
 
-Pure C **simulation** library for Edge Platform hosts: virtual clock and timers
-today; in-memory net and io_uring simulation next. No syscalls.
+Pure C **simulation** library for Edge Platform hosts: virtual clock, timers,
+and in-memory stream net (pipes / listen-accept). io_uring sim next (P0.3).
+No syscalls.
 
 ## Build
 

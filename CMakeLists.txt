@@ -12,6 +12,7 @@ endif()
 add_library(sim STATIC
   src/sim_clock.c
   src/sim_timer.c
+  src/sim_net.c
 )
 target_include_directories(sim PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -22,6 +23,10 @@ enable_testing()
 add_executable(sim_clock_timer_test tests/test_sim_clock_timer.c)
 target_link_libraries(sim_clock_timer_test PRIVATE sim)
 add_test(NAME sim_clock_timer COMMAND sim_clock_timer_test)
+
+add_executable(sim_net_test tests/test_sim_net.c)
+target_link_libraries(sim_net_test PRIVATE sim)
+add_test(NAME sim_net COMMAND sim_net_test)
 
 include(GNUInstallDirs)
 install(TARGETS sim ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})

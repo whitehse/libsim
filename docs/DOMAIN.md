@@ -8,3 +8,5 @@
 | **Pull event** | Host calls `sim_timer_next_event` after advances |
 | **Class A host** | Needs full uring sim (edgehost) — P0.3 |
 | **Class B/C host** | Needs clock/timer/net only |
+| **sim_net pipe** | Two connected stream endpoints; send on A → recv on B |
+| **EAGAIN** | Ring full (send) or empty (recv); non-blocking shape |

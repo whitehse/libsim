@@ -6,7 +6,7 @@ drive a virtual clock; timers and (later) net/uring fire only when that clock
 advances.
 
 **Program track**: Track 0 (`edge-platform-program-design.md`).  
-**Current milestone**: **P0.1** — scaffold + `sim_clock` + `sim_timer`.
+**Current milestone**: **P0.2** — `sim_net` (pipes + listen/accept).
 
 ## Key commands
 
@@ -41,8 +41,8 @@ ctest --test-dir build --output-on-failure
 
 ## Current status
 
-**P0.1**: `sim_clock` + `sim_timer` + smoke tests.  
-**Next**: **P0.2** `sim_net` (in-memory pipes for class B/C hosts).
+**P0.1–P0.2**: `sim_clock` + `sim_timer` + `sim_net` + smoke tests.  
+**Next**: **P0.3** `sim_uring` (class A / edgehost fuzz).
 
 ## Host classes (preview)
 

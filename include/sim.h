@@ -7,5 +7,6 @@
 
 #include "sim_clock.h"
 #include "sim_timer.h"
+#include "sim_net.h"
 
 #endif /* SIM_H */

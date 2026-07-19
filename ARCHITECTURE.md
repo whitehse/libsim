@@ -6,12 +6,13 @@ Provide a **shared, deterministic** stand-in for time (and later network /
 io_uring) so edgehost, CPE agent, and mobile cores can be unit-tested and
 fuzzed without kernel features.
 
-## P0.1 modules
+## Modules
 
-| Module | Role |
-|--------|------|
-| `sim_clock` | Monotonic virtual time (ns); host advances explicitly |
-| `sim_timer` | One-shot / repeating deadlines; pull events when due |
+| Module | PR | Role |
+|--------|-----|------|
+| `sim_clock` | P0.1 | Monotonic virtual time (ns); host advances explicitly |
+| `sim_timer` | P0.1 | One-shot / repeating deadlines; pull events when due |
+| `sim_net` | P0.2 | In-memory stream pipes, listen/connect/accept, ring buffers |
 
 ## Invariants
 
@@ -20,11 +21,10 @@ fuzzed without kernel features.
 3. **Pull events** — no timer callbacks into the host.
 4. **Clock not owned by timer** — host destroys clock after timer mgr.
 
-## Planned (not in P0.1)
+## Planned
 
 | Module | PR |
 |--------|-----|
-| `sim_net` | P0.2 — in-memory bidirectional pipes / packet queues |
 | `sim_uring` | P0.3 — class-A submission/completion sim |
 | fuzz helpers | P0.4 |
 
